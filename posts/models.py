@@ -34,5 +34,4 @@ class Post(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=60)
     body = models.TextField(blank=True)
-
-    user = models.ForeignKey('Users', on_delete=PROTECT, related_name='posts')
+    user = models.ForeignKey('User', on_delete=PROTECT, related_name='posts')
