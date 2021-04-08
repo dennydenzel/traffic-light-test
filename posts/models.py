@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.deletion import PROTECT
-from django.core.validators import MaxValueValidator, MinValueValidator 
 
 
 class User(models.Model):
@@ -20,18 +19,25 @@ class Address(models.Model):
     suite = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     zipcode = models.CharField(max_length=10)
-    lat = models.FloatField(validators=[MinValueValidator(-90.0), MaxValueValidator(90.0)])
-    lng = models.FloatField(validators=[MinValueValidator(-180.0), MaxValueValidator(180.0)])
+    lat = models.FloatField()
+    lng = models.FloatField()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['city', 'street', 'suite'],
+                name='unique_address')
+        ]
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     catchphrase = models.CharField(max_length=255)
     bs = models.CharField(max_length=255)
 
 
 class Post(models.Model):
     id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=255)
     body = models.TextField(blank=True)
     user = models.ForeignKey('User', on_delete=PROTECT, related_name='posts')

@@ -1,3 +1,4 @@
+from posts.services import load_data
 from django.shortcuts import render
 
 
