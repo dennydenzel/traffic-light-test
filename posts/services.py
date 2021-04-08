@@ -79,6 +79,12 @@ def load_data():
 
 
 def delete_data():
+    Post.objects.all().delete()
+    User.objects.all().delete()
     Address.objects.all().delete()
     Company.objects.all().delete()
-    User.objects.all().delete()
+
+
+def get_posts():
+    posts = Post.objects.values('user__name', 'title', 'body')
+    return posts
