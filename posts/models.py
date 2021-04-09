@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.deletion import PROTECT
+from django.db.models.deletion import CASCADE, PROTECT
 
 
 class User(models.Model):
@@ -15,6 +15,7 @@ class User(models.Model):
 
 
 class Address(models.Model):
+    id = models.AutoField(primary_key=True)
     street = models.CharField(max_length=255)
     suite = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
@@ -31,6 +32,7 @@ class Address(models.Model):
 
 
 class Company(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, unique=True)
     catchphrase = models.CharField(max_length=255)
     bs = models.CharField(max_length=255)
@@ -40,4 +42,4 @@ class Post(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=255)
     body = models.TextField(blank=True)
-    user = models.ForeignKey('User', on_delete=PROTECT, related_name='posts')
+    user = models.ForeignKey('User', on_delete=CASCADE, related_name='posts')

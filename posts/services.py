@@ -1,8 +1,8 @@
-from posts.models import Address, Company, Post, User
 import requests
-from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import IntegrityError
 
+from posts.models import Address, Company, Post, User
 
 USERS_URL = 'http://jsonplaceholder.typicode.com/users'
 POSTS_URL = 'http://jsonplaceholder.typicode.com/posts'
@@ -79,7 +79,6 @@ def load_data():
 
 
 def delete_data():
-    Post.objects.all().delete()
     User.objects.all().delete()
     Address.objects.all().delete()
     Company.objects.all().delete()

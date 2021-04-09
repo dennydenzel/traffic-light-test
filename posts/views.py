@@ -1,5 +1,6 @@
-from posts.services import delete_data, load_data, get_posts
 from django.shortcuts import render
+
+from posts.services import delete_data, get_posts, load_data
 
 
 def posts_view(request):
